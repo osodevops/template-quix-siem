@@ -1,2 +1,2 @@
 quixstreams==0.5.7
-dotenv
+python-dotenv
