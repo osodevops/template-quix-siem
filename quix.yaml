@@ -8,8 +8,8 @@ metadata:
 deployments:
   - name: Authentication log gen
     application: Authentication log gen
-    deploymentType: Job
-    version: b3e4c84f921fccec7b1494b8cda9e87052c368d7
+    deploymentType: Service
+    version: 10c6390ccbc8f17a1552b012fe03e75b80047d56
     resources:
       cpu: 200
       memory: 200
