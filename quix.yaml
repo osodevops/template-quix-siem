@@ -5,7 +5,21 @@ metadata:
   version: 1.0
 
 # This section describes the Deployments of the data pipeline
-deployments: []
+deployments:
+  - name: Authentication log gen
+    application: Authentication log gen
+    deploymentType: Job
+    version: b3e4c84f921fccec7b1494b8cda9e87052c368d7
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    variables:
+      - name: Topic
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: authentication-linux-log
 
 # This section describes the Topics of the data pipeline
 topics:
