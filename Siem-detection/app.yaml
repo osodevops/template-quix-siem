@@ -12,5 +12,5 @@ variables:
     defaultValue: hard-braking
     required: true
 dockerfile: build/dockerfile
-runEntryPoint: log_processor.py
+runEntryPoint: main.py
 defaultFile: quix_function.py
