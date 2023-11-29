@@ -39,26 +39,6 @@ deployments:
         description: Name of the input topic to listen to.
         required: true
         value: alerts
-  - name: Authentication SIEM processor
-    application: Siem-detection
-    deploymentType: Service
-    version: 1cc6f36d01d3508134ca2c2c9a1f5e4a160400ca
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Running
-    variables:
-      - name: log_data
-        inputType: InputTopic
-        description: This is the input topic for log data
-        required: true
-        value: authentication-linux-logs
-      - name: alerts
-        inputType: OutputTopic
-        description: This is the output topic for siem alerts
-        required: true
-        value: alerts
   - name: Zeek Http log gen
     application: Zeek Http log gen
     deploymentType: Service
