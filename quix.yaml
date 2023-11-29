@@ -59,6 +59,45 @@ deployments:
         description: This is the output topic for siem alerts
         required: true
         value: alerts
+  - name: Authentication log gen
+    application: Authentication log gen
+    deploymentType: Service
+    version: 145497a33bb9c5363cde1ab42a4520aff25d6483
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    variables:
+      - name: Topic
+        inputType: OutputTopic
+        description: Name of the output topic to write into
+        required: true
+        value: authentication-linux-logs
+  - name: Auth Linux Siem Detection
+    application: Siem-detection
+    deploymentType: Service
+    version: bfaedff41ef1607b96d95861ae9a626a15fa9f02
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: log_data
+        inputType: InputTopic
+        description: This is the input topic for log data
+        required: true
+        value: authentication-linux-logs
+      - name: alerts
+        inputType: OutputTopic
+        description: This is the output topic for siem alerts
+        required: true
+        value: alerts
+      - name: log_info
+        inputType: FreeText
+        description: Consumes zeek logs
+        required: false
+        value: authentication-linux
 
 # This section describes the Topics of the data pipeline
 topics:
