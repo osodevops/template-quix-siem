@@ -67,6 +67,7 @@ deployments:
       cpu: 200
       memory: 500
       replicas: 1
+    desiredStatus: Running
     variables:
       - name: Topic
         inputType: OutputTopic
