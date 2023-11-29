@@ -22,11 +22,11 @@ class FirewallLogGen:
         token = os.getenv("STREAMING_TOKEN")
         logging.info("Preparing Quix Environment for Firewall log gen")
         self.client = qx.QuixStreamingClient() if is_container else qx.QuixStreamingClient(token)
-        self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("FIREWALL_TOPIC", "firewall-logs"))
+        self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("Topic", "zeek-firewall-logs"))
         self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 10))
 
         base_path = os.path.dirname(__file__)
-        file_path = os.path.join(base_path, 'dummy-firewall-event-data.txt')
+        file_path = os.path.join(base_path, 'zeek-firewall.txt')
 
         self.firewall_logs = []
 
