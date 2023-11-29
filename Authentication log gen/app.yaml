@@ -1,0 +1,11 @@
+name: Authentication log gen
+language: python
+variables:
+  - name: Topic
+    inputType: OutputTopic
+    description: Name of the output topic to write into
+    defaultValue: authentication-linux-logs
+    required: true
+dockerfile: build/dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
