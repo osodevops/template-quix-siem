@@ -62,7 +62,7 @@ deployments:
   - name: Authentication log gen
     application: Authentication log gen
     deploymentType: Service
-    version: 145497a33bb9c5363cde1ab42a4520aff25d6483
+    version: e07b4aa745f27cadb9fdbdf87b35b9a917a44ecf
     resources:
       cpu: 200
       memory: 500
