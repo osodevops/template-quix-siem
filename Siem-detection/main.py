@@ -77,7 +77,7 @@ class LogProcessor:
     # Hopefully won't time out the consumer - even with thousands of entries
     def wait_until_rules_loaded(self):
         for _ in range(5):
-            logging.info(f"Waiting until all rules are loaded.")
+            logging.info("Waiting until all rules are loaded.")
             time.sleep(1)
 
         logging.info(f"Number of sigma rules loaded: {len(self.sigma_rules_info)}")
@@ -191,7 +191,7 @@ class LogProcessor:
             return
 
         if not self.go_detector.update_rule(data_content):
-            logging.error(f"The content of this yaml was rejected by the go sigma parser")
+            logging.error("The content of this yaml was rejected by the go sigma parser")
             return
 
         self.sigma_rules_info[rule_id] = sigma_rule
@@ -203,7 +203,7 @@ class LogProcessor:
 
     def run(self):
         App.run()
-        logging.info(f"Processor stopped.")
+        logging.info("Processor stopped.")
 
 
 if __name__ == "__main__":
