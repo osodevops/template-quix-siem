@@ -59,21 +59,6 @@ deployments:
         description: This is the output topic for siem alerts
         required: true
         value: alerts
-  - name: Zeek Http log gen
-    application: Zeek Http log gen
-    deploymentType: Service
-    version: 534e6d4931694cfd05e669d2458ca72e998fc903
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    desiredStatus: Stopped
-    variables:
-      - name: Topic
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: zeek-http-logs
 
 # This section describes the Topics of the data pipeline
 topics:
