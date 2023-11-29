@@ -42,7 +42,7 @@ deployments:
   - name: Siem Detection
     application: Siem-detection
     deploymentType: Service
-    version: 658f8dec91ba1a075206dcda7f0f5214b2af2267
+    version: 05586c51c1983cef618e0a54636422e9206def58
     resources:
       cpu: 200
       memory: 500
