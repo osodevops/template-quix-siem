@@ -4,7 +4,7 @@ variables:
   - name: log_data
     inputType: InputTopic
     description: This is the input topic for log data
-    defaultValue: authentication-linux-logs
+    defaultValue: zeek-firewall-logs
     required: true
   - name: alerts
     inputType: OutputTopic
