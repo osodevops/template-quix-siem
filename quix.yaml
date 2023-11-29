@@ -32,7 +32,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: streamlit
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
