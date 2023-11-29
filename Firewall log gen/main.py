@@ -26,7 +26,7 @@ class FirewallLogGen:
         self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 10))
 
         base_path = os.path.dirname(__file__)
-        file_path = os.path.join(base_path, 'resources', 'raw-firewall-event-data.txt')
+        file_path = os.path.join(base_path, 'dummy-firewall-event-data.txt')
 
         self.firewall_logs = []
 
