@@ -27,7 +27,7 @@ class DnsLogGen:
         base_path = os.path.dirname(__file__)
         file_path = os.path.join(base_path, 'zeek-http.txt')
 
-        self.dns_logs = []
+        self.logs = []
 
         try:
             with open(file_path, 'r') as file:
@@ -35,7 +35,7 @@ class DnsLogGen:
                     # Convert each line from JSON to a Python dictionary
                     try:
                         json_log_entry = json.loads(line.strip())
-                        self.dns_logs.append(json_log_entry)
+                        self.logs.append(json_log_entry)
                     except json.JSONDecodeError:
                         logging.error(f"Invalid JSON format: {line.strip()} - skipping line")
         except FileNotFoundError:
@@ -45,8 +45,8 @@ class DnsLogGen:
     def yield_loop(self):
         interval = 1 / self.records_per_second
 
-        # Endlessly iterate over the dns_logs list
-        for curr_log_entry in itertools.cycle(self.dns_logs):
+        # Endlessly iterate over the logs list
+        for curr_log_entry in itertools.cycle(self.logs):
             start_time = time.time()
             random_id = ''.join(random.choices(string.ascii_letters + string.digits, k=15))
             curr_log_entry['uid'] = random_id
@@ -59,7 +59,7 @@ class DnsLogGen:
                 time.sleep(interval - elapsed_time)
 
     def generate(self):
-        if self.dns_logs:
+        if self.logs:
             log_generator = self.yield_loop()
             for i, log_entry in enumerate(log_generator):
                 json_string = json.dumps(log_entry)
