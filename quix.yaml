@@ -42,7 +42,7 @@ deployments:
   - name: Zeek Http Siem Detection
     application: Siem-detection
     deploymentType: Service
-    version: 1cc6f36d01d3508134ca2c2c9a1f5e4a160400ca
+    version: 7174d0950d7f61fbff473e4e6133d29677748e49
     resources:
       cpu: 200
       memory: 500
@@ -59,6 +59,11 @@ deployments:
         description: This is the output topic for siem alerts
         required: true
         value: alerts
+      - name: log_info
+        inputType: FreeText
+        description: Consumes zeek logs
+        required: false
+        value: zeek
   - name: Authentication log gen
     application: Authentication log gen
     deploymentType: Service
