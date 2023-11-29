@@ -74,6 +74,26 @@ deployments:
         description: Name of the output topic to write into
         required: true
         value: zeek-http-logs
+  - name: Zeek Http Siem Detection
+    application: Siem-detection
+    deploymentType: Service
+    version: 1cc6f36d01d3508134ca2c2c9a1f5e4a160400ca
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: log_data
+        inputType: InputTopic
+        description: This is the input topic for log data
+        required: true
+        value: zeek-http-logs
+      - name: alerts
+        inputType: OutputTopic
+        description: This is the output topic for siem alerts
+        required: true
+        value: alerts
 
 # This section describes the Topics of the data pipeline
 topics:
