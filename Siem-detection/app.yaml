@@ -1,16 +1,16 @@
 name: Siem Detection
 language: python
 variables:
-  - name: input
+  - name: input_log
     inputType: InputTopic
-    description: This is the input topic for f1 data
+    description: This is the input topic for log data
     defaultValue: authentication-linux-log
     required: true
-  - name: output
+  - name: alerts
     inputType: OutputTopic
-    description: This is the output topic for hard braking events
-    defaultValue: hard-braking
+    description: This is the output topic for siem alerts
+    defaultValue: alerts
     required: true
 dockerfile: build/dockerfile
 runEntryPoint: main.py
-defaultFile: quix_function.py
+defaultFile: main.py

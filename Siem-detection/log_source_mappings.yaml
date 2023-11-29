@@ -1,0 +1,41 @@
+# Map your log info to specific alert fields if required
+# 1) If the "to" field is *info the "from" field name and value to the additional_info map
+# 2) If the "to" field is *tag the "from" field value will be added to a tag list
+# 3) If any field on the alerts topic is specified in the "to" it will be populated as specified in the "from"
+# - allowed fields for point 3: source_system, source_ip, source_port, target_system
+mappings:
+  - logsource: "dns-opendns"
+    fields:
+      - from: "org_ip"
+        to: "source_ip"
+  - logsource: "firewall-cisco"
+    fields:
+      - from: "src_ip"
+        to: "source_ip"
+  - logsource: "firewall-windows11"
+    fields:
+      - from: "source_ip_addr"
+        to: "source_ip"
+  - logsource: "webserver-apache"
+    fields:
+      - from: "orig_port_no"
+        to: "source_port"
+  - logsource: "authentication-linux"
+    fields:
+      - from: "src_ip"
+        to: "source_ip"
+      - from: "port"
+        to: "source_port"
+      - from: "timestamp"
+        to: "*info"
+      - from: action
+        to: "*tag"
+      - from: action
+        to: "*info"
+      - from: "user"
+        to: "*info"
+      - from: "status"
+        to: "*info"
+      - from: "device_type"
+        to: "*info"
+

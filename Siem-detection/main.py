@@ -35,11 +35,11 @@ class LogProcessor:
         self.sigma_rules_info = {}
         self.sigma_rules_loaded = False
 
-        log_topic = self.log_source + "-logs"
+        log_topic = os.environ["log_data"]
         local_extension = "" if is_container else f"_{socket.gethostname().lower()}"
         self.log_consumer = self.client.get_raw_topic_consumer(log_topic, "siem_" + self.log_source + local_extension,
                                                                auto_offset_reset=AutoOffsetReset.Earliest)
-        self.alert_producer = self.client.get_raw_topic_producer(os.environ.get("ALERT_TOPIC", "alerts"))
+        self.alert_producer = self.client.get_raw_topic_producer(os.environ.get("alerts", "alerts"))
         self.log_consumer.on_message_received = self.on_log_message_received_handler
         self.log_consumer.on_error_occurred = self.on_log_error_occurred_handler
 

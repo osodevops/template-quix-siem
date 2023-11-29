@@ -19,7 +19,7 @@ class AuthLogGen:
         token = os.getenv("STREAMING_TOKEN")
         logging.info("Preparing Quix Environment for Authentication logs gen")
         self.client = qx.QuixStreamingClient() if is_container else qx.QuixStreamingClient(token)
-        self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("AUTH_TOPIC",
+        self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("Topic",
                                                                                 "authentication-linux-logs"))
         self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 5))
         self.users = [
