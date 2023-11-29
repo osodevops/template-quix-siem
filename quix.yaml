@@ -6,21 +6,6 @@ metadata:
 
 # This section describes the Deployments of the data pipeline
 deployments:
-  - name: Authentication log gen
-    application: Authentication log gen
-    deploymentType: Service
-    version: 86a088de1debbb44c93897d9742cdbc7cd563345
-    resources:
-      cpu: 200
-      memory: 200
-      replicas: 1
-    desiredStatus: Running
-    variables:
-      - name: Topic
-        inputType: OutputTopic
-        description: Name of the output topic to write into
-        required: true
-        value: authentication-linux-log
   - name: Reporter
     application: Reporter
     deploymentType: Service
