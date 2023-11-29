@@ -1,7 +1,7 @@
 name: Siem Detection
 language: python
 variables:
-  - name: input_log
+  - name: log_data
     inputType: InputTopic
     description: This is the input topic for log data
     defaultValue: authentication-linux-log

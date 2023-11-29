@@ -35,7 +35,7 @@ class LogProcessor:
         self.sigma_rules_info = {}
         self.sigma_rules_loaded = False
 
-        log_topic = os.environ["input_log"]
+        log_topic = os.environ.get("log_data", "authentication-linux-logs")
         local_extension = "" if is_container else f"_{socket.gethostname().lower()}"
         self.log_consumer = self.client.get_raw_topic_consumer(log_topic, "siem_" + self.log_source + local_extension,
                                                                auto_offset_reset=AutoOffsetReset.Earliest)
