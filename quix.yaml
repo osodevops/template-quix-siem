@@ -62,12 +62,12 @@ deployments:
   - name: Zeek Http log gen
     application: Zeek Http log gen
     deploymentType: Service
-    version: f970387a00cb5ce4a16059e4c94af5e5bb7b83f1
+    version: 534e6d4931694cfd05e669d2458ca72e998fc903
     resources:
       cpu: 200
       memory: 500
       replicas: 1
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: Topic
         inputType: OutputTopic
