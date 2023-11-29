@@ -11,6 +11,11 @@ variables:
     description: This is the output topic for siem alerts
     defaultValue: alerts
     required: true
+  - name: log_info
+    inputType: FreeText
+    description: Consumes zeek logs
+    defaultValue: zeek
+    required: false
 dockerfile: build/dockerfile
 runEntryPoint: main.py
 defaultFile: main.py
