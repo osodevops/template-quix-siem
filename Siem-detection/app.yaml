@@ -14,7 +14,7 @@ variables:
   - name: log_info
     inputType: FreeText
     description: Consumes zeek logs
-    defaultValue: zeek
+    defaultValue: authentication-linux
     required: false
 dockerfile: build/dockerfile
 runEntryPoint: main.py
