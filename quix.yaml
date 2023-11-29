@@ -39,6 +39,26 @@ deployments:
         description: Name of the input topic to listen to.
         required: true
         value: alerts
+  - name: Siem Detection
+    application: Siem-detection
+    deploymentType: Service
+    version: 658f8dec91ba1a075206dcda7f0f5214b2af2267
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: log_data
+        inputType: InputTopic
+        description: This is the input topic for log data
+        required: true
+        value: authentication-linux-log
+      - name: alerts
+        inputType: OutputTopic
+        description: This is the output topic for siem alerts
+        required: true
+        value: alerts
 
 # This section describes the Topics of the data pipeline
 topics:
