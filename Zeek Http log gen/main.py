@@ -22,7 +22,7 @@ class DnsLogGen:
         logging.info("Preparing Quix Environment for Zeek-Http log gen")
         self.client = qx.QuixStreamingClient() if is_container else qx.QuixStreamingClient(token)
         self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("Topic", "zeek-http-logs"))
-        self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 100))
+        self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 5))
 
         base_path = os.path.dirname(__file__)
         file_path = os.path.join(base_path, 'zeek-http.txt')
