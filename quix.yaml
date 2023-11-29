@@ -21,6 +21,24 @@ deployments:
         description: Name of the output topic to write into
         required: true
         value: authentication-linux-log
+  - name: Reporter
+    application: Reporter
+    deploymentType: Service
+    version: 6edd07c0096ca0e40a4a85f96603b3e6c668a0b0
+    resources:
+      cpu: 200
+      memory: 200
+      replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: streamlit
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the input topic to listen to.
+        required: true
+        value: alerts
 
 # This section describes the Topics of the data pipeline
 topics:
