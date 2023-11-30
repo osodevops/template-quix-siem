@@ -126,6 +126,21 @@ deployments:
         description: Consumes zeek logs
         required: false
         value: zeek
+  - name: Streamlit Reporter
+    application: Streamlit Reporter
+    deploymentType: Service
+    version: 9e154a90d71cd8f6fb0934b17ff7477ee33d7513
+    resources:
+      cpu: 200
+      memory: 500
+      replicas: 1
+    desiredStatus: Running
+    variables:
+      - name: input
+        inputType: InputTopic
+        description: Name of the alert topic to listen to.
+        required: true
+        value: alerts
 
 # This section describes the Topics of the data pipeline
 topics:
