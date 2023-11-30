@@ -129,11 +129,14 @@ deployments:
   - name: Streamlit Reporter
     application: Streamlit Reporter
     deploymentType: Service
-    version: d057bc5d8c347696bb298cbb2ad518f0405efccd
+    version: 7cd61dd4e953a433774b9818dc24377d7b309f82
     resources:
       cpu: 200
       memory: 500
       replicas: 1
+    publicAccess:
+      enabled: true
+      urlPrefix: streamlitreporter-d057bc5
     desiredStatus: Running
     variables:
       - name: input
