@@ -17,6 +17,7 @@ from quixstreams import QuixStreamingClient, AutoOffsetReset, RawTopicConsumer, 
 # Using Streamlit it will update the UI every 5 seconds. (I have not made a websockets version yet)
 class AlertProcessor:
     def __init__(self):
+        self._lock = threading.Lock()
         is_container = bool(os.getenv('KUBERNETES_SERVICE_HOST'))
         local_extension = "" if is_container else f"_{socket.gethostname().lower()}"
         logging.basicConfig(level=logging.INFO)
@@ -65,13 +66,14 @@ class AlertProcessor:
             'log_source': json_obj.get('log_source', '')
         }
 
-        # Add the new row to the DataFrame
-        self.alerts_df = pd.concat([pd.DataFrame([alert_ui_row]), self.alerts_df])
+        # Add the new row to the DataFrame and crop to max size as needed
+        with self._lock:
+            self.alerts_df = pd.concat([pd.DataFrame([alert_ui_row]), self.alerts_df])
 
-        # Limit the size of the DataFrame to the last N rows
-        max_rows = 1000  # Set the max number of rows
-        if len(self.alerts_df) > max_rows:
-            self.alerts_df = self.alerts_df.head(max_rows)
+            # Limit the size of the DataFrame to the last N rows
+            max_rows = 1000  # Set the max number of rows
+            if len(self.alerts_df) > max_rows:
+                self.alerts_df = self.alerts_df.head(max_rows)
 
     def on_alert_error_occurred_handler(self, topic_consumer: RawTopicConsumer, error_message: BaseException):
         logging.error(f"Log receiving error.{error_message}")
