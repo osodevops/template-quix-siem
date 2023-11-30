@@ -170,7 +170,7 @@ class LogProcessor:
     def on_rule_error_occurred_handler(self, topic_consumer: RawTopicConsumer, error_message: BaseException):
         logging.error(f"Sigma rule receiving error.{error_message}")
 
-     # The idea is that sigma rules can be updated from a compact topic, for now loaded from disk
+    # The idea is that sigma rules can be updated from a compact topic, for now loaded from disk
     def update_sigma_rule_map(self, data_content):
         try:
             sigma_rule = yaml.safe_load(data_content)

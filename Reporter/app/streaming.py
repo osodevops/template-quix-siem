@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import quixstreams as qx
 
@@ -9,15 +11,12 @@ qx.Logging.update_factory(qx.LogLevel.Debug)
 
 
 def start_quixstreams(topic_name: str, state_store: StreamStateStore):
-    """
-    Start streaming data from Quix
-    :param topic_name: Input topic name
-    :param state_store: Instance of store.StreamStateStore to keep the dataframe rows
-    """
-    client = qx.QuixStreamingClient()
+    is_container = bool(os.getenv('KUBERNETES_SERVICE_HOST'))
+    token = os.getenv("STREAMING_TOKEN")
+    client = qx.QuixStreamingClient() if is_container else qx.QuixStreamingClient(token)
 
-    consumer_topic = client.get_topic_consumer(
-        topic_name, None, auto_offset_reset=qx.AutoOffsetReset.Latest
+    consumer_topic = client.get_raw_topic_consumer(
+        topic_name, "siem_" + topic_name, auto_offset_reset=qx.AutoOffsetReset.Latest
     )
 
     def read_stream(stream_consumer: qx.StreamConsumer):

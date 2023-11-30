@@ -12,7 +12,7 @@ class StreamStateStore:
     saves them to the disk
     """
 
-    def __init__(self, max_size: int = 500):
+    def __init__(self, max_size: int = 5000):
         """
         Initialize the store
 

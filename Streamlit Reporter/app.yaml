@@ -1,0 +1,11 @@
+name: Streamlit Reporter
+language: python
+variables:
+  - name: input
+    inputType: InputTopic
+    description: Name of the alert topic to listen to.
+    defaultValue: alerts
+    required: true
+dockerfile: build/dockerfile
+runEntryPoint: main.py
+defaultFile: main.py
