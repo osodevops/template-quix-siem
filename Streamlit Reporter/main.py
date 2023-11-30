@@ -17,7 +17,7 @@ from quixstreams import QuixStreamingClient, AutoOffsetReset, RawTopicConsumer, 
 # Using Streamlit it will update the UI every 5 seconds. (I have not made a websockets version yet)
 class AlertProcessor:
     def __init__(self):
-        self._lock = threading.Lock()
+        self.lock = threading.Lock()
         is_container = bool(os.getenv('KUBERNETES_SERVICE_HOST'))
         local_extension = "" if is_container else f"_{socket.gethostname().lower()}"
         logging.basicConfig(level=logging.INFO)
@@ -67,13 +67,14 @@ class AlertProcessor:
         }
 
         # Add the new row to the DataFrame and crop to max size as needed
-        with self._lock:
-            self.alerts_df = pd.concat([pd.DataFrame([alert_ui_row]), self.alerts_df])
+        with self.lock:
+            if 'alerts_df' in st.session_state:
+                st.session_state.alerts_df = st.session_state.alerts_df.append(alert_ui_row, ignore_index=True)
 
-            # Limit the size of the DataFrame to the last N rows
-            max_rows = 1000  # Set the max number of rows
-            if len(self.alerts_df) > max_rows:
-                self.alerts_df = self.alerts_df.head(max_rows)
+                # Limit the size of the DataFrame to the last N rows
+                max_rows = 1000
+                if len(st.session_state.alerts_df) > max_rows:
+                    st.session_state.alerts_df = st.session_state.alerts_df.head(max_rows)
 
     def on_alert_error_occurred_handler(self, topic_consumer: RawTopicConsumer, error_message: BaseException):
         logging.error(f"Log receiving error.{error_message}")
@@ -90,7 +91,7 @@ class AlertProcessor:
 
 
 if __name__ == "__main__":
-    st.title = "SIEM Alerts"
+    st.title("SIEM Alerts")
     st.set_page_config(layout="wide")
 
     processor = AlertProcessor()
@@ -99,13 +100,16 @@ if __name__ == "__main__":
     chart_placeholder = st.empty()
     table_placeholder = st.empty()
 
-    while True:
-        processor.refresh_alerts()
+    # Replace the while True loop with Streamlit's rerun capability
+    processor.refresh_alerts()
 
-        chart_data = processor.process_data_for_chart()
-        chart_title_placeholder.markdown("#### Number of Alerts per Minute")
+    chart_data = processor.process_data_for_chart()
+    chart_title_placeholder.markdown("#### Number of Alerts per Minute")
 
-        chart_placeholder.line_chart(chart_data)
+    chart_placeholder.line_chart(chart_data)
 
-        table_placeholder.table(st.session_state.alerts_df)
-        time.sleep(5)
+    table_placeholder.table(st.session_state.alerts_df)
+
+    # Trigger a rerun of the app after a delay
+    time.sleep(5)
+    st.experimental_rerun()
