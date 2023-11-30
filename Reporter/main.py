@@ -8,12 +8,6 @@ from app.streaming import start_quixstreams
 
 
 def start_streamlit(port: int):
-    """
-    Run Streamlit as subprocess and wait for its exit.
-
-    If OS kills streamlit with OOM, the main process will stop too.
-    :param port: Streamlit server port
-    """
     return subprocess.run(
         [
             "streamlit",
