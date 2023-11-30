@@ -15,11 +15,6 @@ class Server:
 
 
 def serve(port: int, state_store: StreamStateStore):
-    """
-    Launch a simple HTTP server to serve the streaming data for Streamlit
-    :param port: Port number
-    :param state_store: stream state store with the records to serve for Streamlit
-    """
     cherrypy.config.update(
         {
             "server.socket_host": "localhost",
