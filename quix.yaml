@@ -137,7 +137,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: streamlitreporter-d057bc5
-    desiredStatus: Stopped
+    desiredStatus: Running
     variables:
       - name: input
         inputType: InputTopic
