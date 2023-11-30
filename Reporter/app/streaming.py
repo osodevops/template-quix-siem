@@ -1,5 +1,5 @@
 import os
-
+import json
 import pandas as pd
 import quixstreams as qx
 
@@ -19,21 +19,23 @@ def start_quixstreams(topic_name: str, state_store: StreamStateStore):
         topic_name, "siem_" + topic_name, auto_offset_reset=qx.AutoOffsetReset.Latest
     )
 
-    def read_stream(stream_consumer: qx.StreamConsumer):
-        """
-        Callback to react to new data received from input topic.
-        Called for each incoming stream.
-        """
+    def on_alert_message_received_handler(topic_consumer: qx.RawTopicConsumer, msg: qx.RawMessage):
+        json_str = msg.value.decode("utf-8")
+        json_obj = json.loads(json_str)
 
-        def on_read_pandas_data(_: qx.StreamConsumer, df_i: pd.DataFrame):
-            """
-            Callback called for each incoming data frame
-            """
-            df_i["datetime"] = pd.to_datetime(df_i["timestamp"])
-            # Add new data to the store
-            state_store.append(df_i)
+        # Extract the required fields
+        alert_ui_row = {
+            'alert_id': json_obj.get('alert_id', ''),
+            'timestamp': json_obj.get('timestamp', ''),
+            'alert_title': json_obj.get('alert_title', ''),
+            'source_ip': json_obj.get('source_ip', ''),
+            'source_port': json_obj.get('source_port', ''),
+            'log_source': json_obj.get('log_source', '')
+        }
 
-        stream_consumer.timeseries.on_dataframe_received = on_read_pandas_data
+        # Add the new row to the DataFrame
+        state_store.append(pd.DataFrame([alert_ui_row]))
 
-    consumer_topic.on_stream_received = read_stream
+
+    consumer_topic.on_message_received = on_alert_message_received_handler
     qx.App.run()
