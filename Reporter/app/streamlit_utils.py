@@ -57,7 +57,7 @@ def get_stream_df(
         except OSError:
             logger.info(f'Dataframe url "{url}" is not found')
         except pd.errors.EmptyDataError:
-            logger.info(f"Dataframe is empty")
+            logger.info("Dataframe is empty")
 
         # If timeout exceeded, raise the error
         if time.monotonic() - start_time >= poll_timeout:
