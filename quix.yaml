@@ -129,7 +129,7 @@ deployments:
   - name: Streamlit Reporter
     application: Streamlit Reporter
     deploymentType: Service
-    version: 9e154a90d71cd8f6fb0934b17ff7477ee33d7513
+    version: d057bc5d8c347696bb298cbb2ad518f0405efccd
     resources:
       cpu: 200
       memory: 500

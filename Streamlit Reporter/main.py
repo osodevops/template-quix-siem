@@ -45,7 +45,7 @@ class AlertProcessor:
     def run(self):
         logging.info("Processor started on new thread")
         App.run()
-        logging.info(f"Processor stopped.")
+        logging.info("Processor stopped.")
 
     def refresh_alerts(self):
         logging.info("Refreshing alerts df")
