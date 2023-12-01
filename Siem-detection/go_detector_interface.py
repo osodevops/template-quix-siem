@@ -22,5 +22,10 @@ class GoDetectorInterface:
     def is_valid_sigma_rule(self, rule):
         return self.lib.isValidSigmaRule(ctypes.c_char_p(rule.encode('utf-8')))
 
+    # Find match does not encode to utf-8 as the message value from kafka is already utf-8 in this poc
     def find_match(self, log_entry):
         return self.lib.findMatch(ctypes.c_char_p(log_entry)).decode('utf-8')
+
+    def find_match_str(self, log_entry):
+        return self.find_match(log_entry.encode('utf-8'))
+
