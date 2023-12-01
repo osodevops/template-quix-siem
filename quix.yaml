@@ -9,7 +9,7 @@ deployments:
   - name: Zeek Http log gen
     application: Zeek Http log gen
     deploymentType: Service
-    version: f970387a00cb5ce4a16059e4c94af5e5bb7b83f1
+    version: 20fb03479ac44813f938d4146a4ac4223fadab26
     resources:
       cpu: 200
       memory: 500
