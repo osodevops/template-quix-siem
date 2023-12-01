@@ -10,16 +10,16 @@ tags:
   - attack.collection 
 detection:
   selection:
-    orig_bytes|lt: 1000000000 # 1GB
-    resp_bytes|gt: 100000000 # 100MB
+    request_body_len|lt: 1000000000 # 1GB
+    response_body_len|gt: 100000000 # 100MB
   condition: selection
 fields:
   - id.orig_h
   - id.orig_p
   - id.resp_h
   - id.resp_p
-  - orig_bytes
-  - resp_bytes
+  - request_body_len
+  - response_body_len
   - service
   - duration
   - orig_pkts

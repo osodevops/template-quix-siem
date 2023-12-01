@@ -14,7 +14,7 @@ from quixstreams import RawMessage
 logging.basicConfig(level=logging.INFO)
 
 
-class DnsLogGen:
+class HttpLogGen:
     def __init__(self):
         is_container = bool(os.getenv('KUBERNETES_SERVICE_HOST'))
         load_dotenv()
@@ -23,23 +23,37 @@ class DnsLogGen:
         self.client = qx.QuixStreamingClient() if is_container else qx.QuixStreamingClient(token)
         self.producer_topic = self.client.get_raw_topic_producer(os.environ.get("Topic", "zeek-http-logs"))
         self.records_per_second = int(os.environ.get("RECS_PER_SECOND", 5))
+        self.include_malicious_content = os.environ.get("INCLUDE_MALICIOUS_CONTENT", "True") == "True"
 
         base_path = os.path.dirname(__file__)
-        file_path = os.path.join(base_path, 'zeek-http.txt')
+        log_file = os.path.join(base_path, 'zeek-http.txt')
+        malicious_log_file = os.path.join(base_path, 'zeek-malicious-http.txt')
 
         self.logs = []
+        self.malicious_logs = []
 
         try:
-            with open(file_path, 'r') as file:
+            with open(log_file, 'r') as file:
                 for line in file:
-                    # Convert each line from JSON to a Python dictionary
                     try:
                         json_log_entry = json.loads(line.strip())
                         self.logs.append(json_log_entry)
                     except json.JSONDecodeError:
                         logging.error(f"Invalid JSON format: {line.strip()} - skipping line")
         except FileNotFoundError:
-            logging.error(f"File not found: {file_path}")
+            logging.error(f"File not found: {log_file}")
+            sys.exit()
+
+        try:
+            with open(malicious_log_file, 'r') as file:
+                for line in file:
+                    try:
+                        json_log_entry = json.loads(line.strip())
+                        self.malicious_logs.append(json_log_entry)
+                    except json.JSONDecodeError:
+                        logging.error(f"Invalid JSON format: {line.strip()} - skipping line")
+        except FileNotFoundError:
+            logging.error(f"File not found: {log_file}")
             sys.exit()
 
     def yield_loop(self):
@@ -47,6 +61,9 @@ class DnsLogGen:
 
         # Endlessly iterate over the logs list
         for curr_log_entry in itertools.cycle(self.logs):
+            if self.include_malicious_content and random.randint(1, 30) == 15:
+                curr_log_entry = random.choice(self.malicious_logs)
+
             start_time = time.time()
             random_id = ''.join(random.choices(string.ascii_letters + string.digits, k=15))
             curr_log_entry['uid'] = random_id
@@ -65,7 +82,6 @@ class DnsLogGen:
                 json_string = json.dumps(log_entry)
                 key = bytearray(bytes(log_entry["id.orig_h"], 'utf-8'))
                 message = bytearray(bytes(json_string, 'utf-8'))
-                print(message)
                 message = RawMessage(message)
                 message.key = key
 
@@ -77,5 +93,5 @@ class DnsLogGen:
 
 
 if __name__ == "__main__":
-    DnsLogGen().generate()
+    HttpLogGen().generate()
 

@@ -80,7 +80,6 @@ class FirewallLogGen:
 
                 key = bytearray(bytes(log_entry["source_ip"], 'utf-8'))
                 message = bytearray(bytes(json_string, 'utf-8'))
-                print(message)
                 message = RawMessage(message)
                 message.key = key
 

@@ -89,20 +89,22 @@ class AuthLogGen:
 
     def generate(self):
         interval = 1 / self.records_per_second
+        count = 0
         while True:
 
             iteration_start_time = time.time()
             log_entry, src_ip = self.random_log_entry()
-            print(log_entry)
             key = bytearray(bytes(src_ip, 'utf-8'))
             message = bytearray(bytes(log_entry, 'utf-8'))
             message = RawMessage(message)
             message.key = key
             self.producer_topic.publish(message)
+            count += 1
 
             # Calculate elapsed time and sleep if necessary
             elapsed_time = time.time() - iteration_start_time
             if elapsed_time < interval:
+                logging.info("Auth logs generated: " + str(count))
                 time.sleep(interval - elapsed_time)
                 self.producer_topic.flush()
 
