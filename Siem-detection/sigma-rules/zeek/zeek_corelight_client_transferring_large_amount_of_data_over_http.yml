@@ -14,7 +14,7 @@ detection:
   pre_filter:
     request_body_len: 0
   selectlargerthan:
-    request_body_len|greater_than: 10000000
+    request_body_len|gt: 10000000
   timeframe: 15m
   condition: pre_filter and selectlargerthan
 fields:

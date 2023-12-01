@@ -11,7 +11,7 @@ logsource:
   service: conn
 detection:
   selection:
-    src_port|less_than: 1024
+    src_port|lt: 1024
     service:
       - http
       - ssl

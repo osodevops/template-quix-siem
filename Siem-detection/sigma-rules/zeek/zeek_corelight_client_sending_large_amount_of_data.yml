@@ -10,8 +10,8 @@ tags:
   - attack.collection 
 detection:
   selection:
-    orig_bytes|less_than: 1000000000 # 1GB
-    resp_bytes|greater_than: 100000000 # 100MB
+    orig_bytes|lt: 1000000000 # 1GB
+    resp_bytes|gt: 100000000 # 100MB
   condition: selection
 fields:
   - id.orig_h

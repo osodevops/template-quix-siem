@@ -10,8 +10,8 @@ logsource:
   service: rdp
 detection:
   selection:
-    desktop_height|less_than: 600
-    desktop_width|less_than: 600
+    desktop_height|lt: 600
+    desktop_width|lt: 600
   condition: selection
 fields:
 - id.orig_h
