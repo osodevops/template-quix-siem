@@ -1,4 +1,4 @@
-name: Basic React App
+name: Sigma Rules Manager
 language: nodejs
 variables:
   - name: input
