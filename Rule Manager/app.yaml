@@ -4,7 +4,7 @@ variables:
   - name: input
     inputType: InputTopic
     description: The topic to read from
-    defaultValue: hello-world-source
+    defaultValue: alerts
     required: true
   - name: bearer_token
     inputType: FreeText
