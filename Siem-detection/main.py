@@ -142,6 +142,10 @@ class LogProcessor:
 
             alert_entry["additional_info"]["original_log"] = original_log
 
+            # Apply sigma rule tags to alert
+            for rule_tag in sigma_rule.get("tags", []):
+                alert_entry["tags"].append(rule_tag)
+
             # Apply mappings from log_source_mappings yaml definition
             for mapping in self.log_source_mappings:
                 from_field = mapping['from']

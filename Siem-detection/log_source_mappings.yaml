@@ -4,6 +4,24 @@
 # 3) If any field on the alerts topic is specified in the "to" it will be populated as specified in the "from"
 # - allowed fields for point 3: source_system, source_ip, source_port, target_system
 mappings:
+  - logsource: "zeek"
+    fields:
+      - from: "host"
+        to: "source_system"
+      - from: "id.orig_h"
+        to: "source_ip"
+      - from: "id.orig_p"
+        to: "source_port"
+      - from: "uid"
+        to: "*info"
+      - from: "ts"
+        to: "*info"
+      - from: "status_code"
+        to: "*info"
+      - from: "user_agent"
+        to: "*info"
+      - from: "uri"
+        to: "target_system"
   - logsource: "dns-opendns"
     fields:
       - from: "org_ip"
