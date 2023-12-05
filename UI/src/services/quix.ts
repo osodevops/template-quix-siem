@@ -22,7 +22,7 @@ export class QuixLiveService  {
     private workingLocally = false;
     private token = '';
     private workspaceId: string = "";
-    private subdomain = "dev";//"portal"
+    private subdomain = "platform";//"portal"
 
 
     public async getWorkspaceIdAndToken(doneCallback): Promise<void>{
