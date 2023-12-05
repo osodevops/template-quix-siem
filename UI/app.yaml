@@ -9,7 +9,7 @@ variables:
   - name: bearer_token
     inputType: FreeText
     description: ''
-    defaultValue: ''
+    defaultValue: pat-ca3e35a2779f45eea3fe9c3a779698b6
     required: false
 dockerfile: src/build/dockerfile
 defaultFile: src/services/quix.ts
