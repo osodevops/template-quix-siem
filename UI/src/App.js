@@ -279,7 +279,7 @@ level: medium`;
                     </table>
                 </div>
                 <div style={{ height: '50%', marginTop: '20px' }}>
-                    <Line data={chartData} options={chartOptions} />
+                  <!--  <Line data={chartData} options={chartOptions} /> -->
                 </div>
             </div>
         );
