@@ -1,0 +1,67 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Prevent scrollbars if you want a full-page app */
+}
+
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.ace_editor {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+#columnRight {
+    padding-left: 0 !important;
+}
+
+/* Additional rule to ensure the row and container have no padding or margin */
+.row, .container-fluid {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.search-input::placeholder {
+    color: grey;
+}
+
+.search-input {
+    background-color: black;
+    color: white;
+    margin-top: 10px;
+}
+
+.table-container {
+    overflow-x: auto;
+}
+
+#alertTable {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+#alertTable th, #alertTable td {
+    text-align: left;
+    padding: 8px;
+    border: 1px solid #555;
+}
+
+#alertTable th {
+    background-color: #333;
+    color: #6c757d; /* Changed font color to blue */
+    font-weight: bold;
+}
+
+#alertTable tr:nth-child(even) {
+    background-color: #202020;
+}
+
+@media (max-width: 600px) {
+    #alertTable th, #alertTable td {
+        padding: 4px;
+    }
+}
