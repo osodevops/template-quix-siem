@@ -64,7 +64,7 @@ deployments:
   - name: Auth Linux Siem Detection
     application: Siem-detection
     deploymentType: Service
-    version: 247da6e864f707e065a05111dddbc74d7a8ea886
+    version: 4366f69af0c6fcfb49c793269c2a406e6ba69edd
     resources:
       cpu: 200
       memory: 500
