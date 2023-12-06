@@ -171,6 +171,7 @@ class LogProcessor:
             logging.info(f"Publishing alert: {alert_entry}")
             self.alert_producer.publish(message)
             self.alert_event_stream.events \
+                .add_timestamp(current_utc_datetime) \
                 .add_value("json", json_str) \
                 .publish()
 
