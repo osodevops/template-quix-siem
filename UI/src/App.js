@@ -19,7 +19,7 @@ function App() {
 
   const eventReceived = (event) => {
     setEvent(event); // set the state here
-    console.log("data*******")
+    console.log("eventReceived*******")
     console.log(event);
 
   };
