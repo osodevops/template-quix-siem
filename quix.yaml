@@ -207,7 +207,7 @@ deployments:
   - name: UI
     application: UI
     deploymentType: Service
-    version: b32a228437f274ffe94fee1c43122043cee7f80a
+    version: af87d27792ff28130853e7f0b82857b3640c91d3
     resources:
       cpu: 200
       memory: 500
@@ -215,7 +215,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: ui-387fb49
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
