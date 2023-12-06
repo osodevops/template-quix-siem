@@ -207,7 +207,7 @@ deployments:
   - name: UI
     application: UI
     deploymentType: Service
-    version: 95b023fe4ff7a819af1cbd4d61446ab8a6b8872c
+    version: 9c8ba3528b2aea3a70d077b0b2f0b43277aa2347
     resources:
       cpu: 200
       memory: 500
