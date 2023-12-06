@@ -15,6 +15,11 @@ function App() {
   const onActiveStreamsChanged = (stream, action) => {
     console.log("Active streams changed " + stream.streamId)
     setActiveStreams(prevStreams => [...prevStreams, stream]);
+
+    console.log("stream*******")
+    console.log(stream)
+    console.log("action*******")
+    console.log(action)
   };
 
   const eventReceived = (event) => {
