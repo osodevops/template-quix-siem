@@ -184,9 +184,7 @@ class LogProcessor:
                 .add_value("log_source", alert_entry["log_source"]) \
                 .add_value("target_system", alert_entry["target_system"]) \
                 .add_value("attempt_count", alert_entry["attempt_count"]) \
-                .add_value("tags", alert_entry["tags"]) \
                 .add_value("action_taken", alert_entry["action_taken"]) \
-                .add_value("additional_info", alert_entry["additional_info"]) \
                 .add_value("json", json_str) \
                 .publish()
 
