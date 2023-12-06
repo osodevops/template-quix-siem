@@ -18,10 +18,9 @@ function App() {
   };
 
   const eventReceived = (event) => {
-    setEvent(event); // set the state here
-    console.log("eventReceived*******")
+    console.log("***** eventReceived ******")
     console.log(event);
-
+    setEvent(event); // set the state here
   };
   
   const dataReceived = (data) => {
