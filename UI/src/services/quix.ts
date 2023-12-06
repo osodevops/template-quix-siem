@@ -103,7 +103,6 @@ export class QuixLiveService  {
         let streams = await this.readerHubConnection.invoke("SubscribeToActiveStreams", topic);
 
         this.readerHubConnection.on("ActiveStreamsChanged", (stream: Stream, actionType: string) => {
-            console.log(stream.name)
             activeStreamsChanged(stream, actionType);
         });
         return streams;
@@ -114,6 +113,8 @@ export class QuixLiveService  {
     
         // Listen for event data and emit
         this.readerHubConnection.on("EventDataReceived", (payload: QuixEvent) => {
+          console.log("******** rcv **********")
+          console.log(payload)
           eventReceived(payload);
         });
         return events;
