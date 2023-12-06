@@ -40,6 +40,8 @@ class LogProcessor:
         self.log_consumer = self.client.get_raw_topic_consumer(log_topic, "siem_" + self.log_source + local_extension,
                                                                auto_offset_reset=AutoOffsetReset.Earliest)
         self.alert_producer = self.client.get_raw_topic_producer(os.environ.get("alerts", "alerts"))
+        self.alert_event_stream = (self.client.get_topic_producer(os.environ.get("alert_events", "alert_events"))
+                                   .get_or_create_stream("alerts"))
         self.log_consumer.on_message_received = self.on_log_message_received_handler
         self.log_consumer.on_error_occurred = self.on_log_error_occurred_handler
 
@@ -160,6 +162,7 @@ class LogProcessor:
                     # allowed fields source_system, source_ip, source_port, target_system
                     alert_entry[to_field] = log_value
 
+            json_str = json.dumps(alert_entry)
             key = bytearray(bytes(alert_id, 'utf-8'))
             message = bytearray(bytes(json.dumps(alert_entry), 'utf-8'))
             message = RawMessage(message)
@@ -167,6 +170,25 @@ class LogProcessor:
 
             logging.info(f"Publishing alert: {alert_entry}")
             self.alert_producer.publish(message)
+            self.alert_event_stream.events \
+                .add_timestamp(current_utc_datetime) \
+                .add_value("alert_id", alert_id) \
+                .add_value("timestamp", alert_entry["timestamp"]) \
+                .add_value("sigma_rule_id", alert_entry["sigma_rule_id"]) \
+                .add_value("alert_title", alert_entry["alert_title"]) \
+                .add_value("description", alert_entry["description"]) \
+                .add_value("severity", alert_entry["severity"]) \
+                .add_value("source_system", alert_entry["source_system"]) \
+                .add_value("source_ip", alert_entry["source_ip"]) \
+                .add_value("source_port", alert_entry["source_port"]) \
+                .add_value("log_source", alert_entry["log_source"]) \
+                .add_value("target_system", alert_entry["target_system"]) \
+                .add_value("attempt_count", alert_entry["attempt_count"]) \
+                .add_value("tags", alert_entry["tags"]) \
+                .add_value("action_taken", alert_entry["action_taken"]) \
+                .add_value("additional_info", alert_entry["additional_info"]) \
+                .add_value("json", json_str) \
+                .publish()
 
     def on_log_error_occurred_handler(self, topic_consumer: RawTopicConsumer, error_message: BaseException):
         logging.error(f"Log receiving error.{error_message}")
