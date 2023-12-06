@@ -171,22 +171,25 @@ class LogProcessor:
             logging.info(f"Publishing alert: {alert_entry}")
             self.alert_producer.publish(message)
             self.alert_event_stream.events \
-                .add_timestamp(current_utc_datetime) \
-                .add_value("alert_id", alert_id) \
-                .add_value("timestamp", alert_entry["timestamp"]) \
-                .add_value("sigma_rule_id", alert_entry["sigma_rule_id"]) \
-                .add_value("alert_title", alert_entry["alert_title"]) \
-                .add_value("description", alert_entry["description"]) \
-                .add_value("severity", alert_entry["severity"]) \
-                .add_value("source_system", alert_entry["source_system"]) \
-                .add_value("source_ip", alert_entry["source_ip"]) \
-                .add_value("source_port", alert_entry["source_port"]) \
-                .add_value("log_source", alert_entry["log_source"]) \
-                .add_value("target_system", alert_entry["target_system"]) \
-                .add_value("attempt_count", alert_entry["attempt_count"]) \
-                .add_value("action_taken", alert_entry["action_taken"]) \
                 .add_value("json", json_str) \
                 .publish()
+
+                # Odd behavior as these all came through as seperate events on the UI - will just use json
+                #.add_timestamp(current_utc_datetime) \
+                #.add_value("alert_id", alert_id) \
+                #.add_value("timestamp", alert_entry["timestamp"]) \
+                #.add_value("sigma_rule_id", alert_entry["sigma_rule_id"]) \
+                #.add_value("alert_title", alert_entry["alert_title"]) \
+                #.add_value("description", alert_entry["description"]) \
+                #.add_value("severity", alert_entry["severity"]) \
+                #.add_value("source_system", alert_entry["source_system"]) \
+                #.add_value("source_ip", alert_entry["source_ip"]) \
+                #.add_value("source_port", alert_entry["source_port"]) \
+                #.add_value("log_source", alert_entry["log_source"]) \
+                #.add_value("target_system", alert_entry["target_system"]) \
+                #.add_value("attempt_count", alert_entry["attempt_count"]) \
+                #.add_value("action_taken", alert_entry["action_taken"]) \
+
 
     def on_log_error_occurred_handler(self, topic_consumer: RawTopicConsumer, error_message: BaseException):
         logging.error(f"Log receiving error.{error_message}")
