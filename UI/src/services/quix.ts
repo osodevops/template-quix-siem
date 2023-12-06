@@ -113,8 +113,6 @@ export class QuixLiveService  {
     
         // Listen for event data and emit
         this.readerHubConnection.on("EventDataReceived", (payload: QuixEvent) => {
-          console.log("******** rcv **********")
-          console.log(payload)
           eventReceived(payload);
         });
         return events;
