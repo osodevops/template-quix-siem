@@ -18,16 +18,12 @@ function App() {
   };
 
   const eventReceived = (event) => {
-    console.log("***** eventReceived ******")
-    console.log(event);
+    console.log(event.value);
     setEvent(event); // set the state here
   };
   
   const dataReceived = (data) => {
     setData(data); // set the state here
-
-    console.log("data*******")
-    console.log(data)
   };
 
   const handleSendData = async () => { // new function to handle button click
