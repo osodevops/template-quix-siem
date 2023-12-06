@@ -15,21 +15,17 @@ function App() {
   const onActiveStreamsChanged = (stream, action) => {
     console.log("Active streams changed " + stream.streamId)
     setActiveStreams(prevStreams => [...prevStreams, stream]);
-
-    console.log("stream*******")
-    console.log(stream)
-    console.log("action*******")
-    console.log(action)
   };
 
   const eventReceived = (event) => {
     setEvent(event); // set the state here
-    console.log("event*******")
-    console.log(event)
   };
   
   const dataReceived = (data) => {
     setData(data); // set the state here
+
+    console.log("data*******")
+    console.log(data)
   };
 
   const handleSendData = async () => { // new function to handle button click
