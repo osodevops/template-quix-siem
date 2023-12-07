@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { Line } from 'react-chartjs-2';
+import { Chart as ChartJS } from 'chart.js/auto';
 import AceEditor from 'react-ace';
 import { QuixLiveService } from './services/quix.ts';
 import 'ace-builds/src-noconflict/theme-twilight';
@@ -279,7 +280,7 @@ level: medium`;
                     </table>
                 </div>
                 <div style={{ height: '50%', marginTop: '20px' }}>
-                  <!--  <Line data={chartData} options={chartOptions} /> -->
+                  <Line data={chartData} options={chartOptions} />
                 </div>
             </div>
         );
