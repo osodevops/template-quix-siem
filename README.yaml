@@ -1,0 +1,28 @@
+---
+#
+# This is the canonical configuration for the `README.md`
+# Run `make readme` to rebuild the `README.md`
+#
+
+# Name of this project
+name: "Streaming powered SIEM "
+
+# Short description of this project
+description: |-
+  This templates uses the Quix platfortm to provide in-stream processing for real-time security threat detection and response.
+
+# Canonical GitHub repo
+github_repo: osodevops/template-quix-siem
+
+# How to use this project
+usage: |-
+  Many teams are already using Quix to build and deploy data pipelines. This template provides a starting point for building a real-time security threat detection and response pipeline.
+
+# Example usage
+examples: |-
+  ### How to deploy this demo
+
+related:
+  - name: "LLM-powered customer success dashboard"
+    description: "This template uses Quix and Llama 2 to create a Customer Success Dashboard with Sentiment Analysis."
+    url: "https://github.com/quixio/template-llm-support"
