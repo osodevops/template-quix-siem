@@ -20,7 +20,7 @@ usage: |-
 
 # Example usage
 examples: |-
-  ### How to deploy this demo
+  ### How to deploy this template
 
 related:
   - name: "LLM-powered customer success dashboard"
