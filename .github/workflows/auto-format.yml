@@ -16,7 +16,7 @@ jobs:
       # However, using a personal access token will cause events to be triggered.
       # We need that to ensure a status gets posted after the auto-format commit.
       # We also want to trigger tests if the auto-format made no changes.
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         if: github.event.pull_request.state == 'open'
         name: Privileged Checkout
         with:
@@ -25,7 +25,6 @@ jobs:
           # Check out the PR commit, not the merge commit
           # Use `ref` instead of `sha` to enable pushing back to `ref`
           ref: ${{ github.event.pull_request.head.ref }}
-
       # Do all the formatting stuff
       - name: Auto Format
         if: github.event.pull_request.state == 'open'
