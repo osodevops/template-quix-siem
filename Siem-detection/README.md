@@ -31,11 +31,12 @@ ENTRYPOINT ["python3", "main.py"]
 ```
 
 
-### Upload compile *.so file
-It's not automated as yet. Maybe the go project can be built in dockerfile
+### Rule Checker (Go code)
+The dectector.so is compiled Go code. It has been written to improve performance in the rule checking against the incoming data.
+The wrapper code also written in go is here: 
+https://github.com/osodevops/quix-siem (Initial POC code + the Go Siem Detector - look at readme to compile and copy to detector.so here in this project)
+https://github.com/osodevops/sigma-go (Brought this into oso because it needed a fix)
 
-Upload to Quix root folder of the Application.
-Press Commit immediatley and **don't** save it (It's already uploaded!) otherwise it gets overwritten by the text area representation of the compiled code.
 
 ### Deploy
 Deploy the project from the portal, check the logs
