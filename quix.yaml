@@ -24,7 +24,7 @@ deployments:
   - name: Zeek Http Siem Detection
     application: Siem-detection
     deploymentType: Service
-    version: 99549ffadb169100278f3aa663ee5ee1e374912c
+    version: 69adaaa35a9d081a995cc522139b6d762b11e693
     resources:
       cpu: 200
       memory: 500
