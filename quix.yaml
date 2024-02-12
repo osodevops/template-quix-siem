@@ -148,17 +148,10 @@ deployments:
         inputType: FreeText
         description: ''
         required: false
-        value: pat-162de1e7d0934e4288af9a10bc5ca5c1
+        value: {{ pat_token }}
 
 # This section describes the Topics of the data pipeline
 topics:
-  - name: hello-world-source
-    persisted: false
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: 1440
-      retentionInBytes: 52428800
   - name: alert_events
     persisted: false
     configuration:
