@@ -155,7 +155,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: reporter-777ef3a
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
