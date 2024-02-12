@@ -1,6 +1,8 @@
 
 <!-- markdownlint-disable -->
-# Streaming powered SIEM 
+# Streaming powered SIEM - Quix Template
+
+
 <!-- markdownlint-restore -->
 
 [![README Header][readme_header_img]][readme_header_link]
