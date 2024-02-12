@@ -144,29 +144,6 @@ deployments:
         description: Name of the input topic to listen to.
         required: true
         value: alerts
-  - name: Sigma Rules Manager
-    application: Rule Manager
-    deploymentType: Service
-    version: ab3c4d05a71e0e2cdb367db1b766192932c553b3
-    resources:
-      cpu: 200
-      memory: 500
-      replicas: 1
-    publicAccess:
-      enabled: true
-      urlPrefix: rulemanager-8fcdc7c
-    desiredStatus: Running
-    variables:
-      - name: input
-        inputType: InputTopic
-        description: The topic to read from
-        required: true
-        value: alerts
-      - name: bearer_token
-        inputType: FreeText
-        description: ''
-        required: false
-        value: pat-36814c6bfddf48ccb06f6da0bbca0608
   - name: Basic React App
     application: React starter template
     deploymentType: Service
