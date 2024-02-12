@@ -187,6 +187,7 @@ topics:
       replicationFactor: 2
       retentionInMinutes: 7200
       retentionInBytes: 52428800
+      cleanupPolicy: Delete
   - name: alerts
     persisted: false
     configuration:
