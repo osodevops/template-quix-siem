@@ -221,7 +221,7 @@ deployments:
         inputType: InputTopic
         description: The topic to read from
         required: true
-        value: alerts
+        value: alert_events
       - name: bearer_token
         inputType: FreeText
         description: ''
