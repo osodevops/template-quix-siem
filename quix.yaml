@@ -137,7 +137,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: ui-387fb49
-    desiredStatus: Stopped
+    desiredStatus: Running
     variables:
       - name: input
         inputType: InputTopic
