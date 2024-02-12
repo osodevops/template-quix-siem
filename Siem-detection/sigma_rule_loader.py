@@ -16,7 +16,7 @@ from go_detector_interface import GoDetectorInterface
 class SigmaRulesLoader:
     def __init__(self):
         is_container = bool(os.getenv('KUBERNETES_SERVICE_HOST'))
-        self.detector = GoDetectorInterface()
+        # self.detector = GoDetectorInterface()
         load_dotenv()
         token = os.getenv("STREAMING_TOKEN")
         print("Preparing Quix Environment for Authentication logs gen")
@@ -92,9 +92,9 @@ class SigmaRulesLoader:
             print(f"Uploading: {file_name} to topic")
             rule_obj = yaml.safe_load(file_content)  # Load the content, not the file name
 
-            if not self.detector.is_valid_sigma_rule(file_content):
-                print(f"Problem validating rule.")
-                continue
+            # if not self.detector.is_valid_sigma_rule(file_content):
+            #     print(f"Problem validating rule.")
+            #     continue
 
             key = bytearray(bytes(rule_obj['id'], 'utf-8'))
             message = bytearray(bytes(file_content, 'utf-8'))  # Use file content here
