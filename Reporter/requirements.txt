@@ -1,4 +1,0 @@
-quixstreams==0.5.7
-streamlit==1.28.2
-cherrypy==18.8.0
-python-dotenv==0.21.0
