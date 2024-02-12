@@ -151,4 +151,11 @@ deployments:
         value: pat-94e6b5b4cc9946528586ac8d0fb3c31a
 
 # This section describes the Topics of the data pipeline
-topics: []
+topics:
+  - name: sigma-rules
+    persisted: false
+    configuration:
+      partitions: 1
+      replicationFactor: 2
+      retentionInMinutes: 1440
+      retentionInBytes: 52428800
