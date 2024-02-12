@@ -173,7 +173,7 @@ deployments:
     publicAccess:
       enabled: true
       urlPrefix: rulemanager-8fcdc7c
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: input
         inputType: InputTopic
