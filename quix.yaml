@@ -152,13 +152,6 @@ deployments:
 
 # This section describes the Topics of the data pipeline
 topics:
-  - name: sigma-rules
-    persisted: false
-    configuration:
-      partitions: 1
-      replicationFactor: 2
-      retentionInMinutes: 10080
-      retentionInBytes: 52428800
   - name: zeek-firewall-logs
     persisted: false
     configuration:
