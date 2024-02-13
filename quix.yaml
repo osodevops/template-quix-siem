@@ -194,3 +194,4 @@ topics:
       replicationFactor: 2
       retentionInMinutes: 14400
       retentionInBytes: 52428800
+      deletePolicy: Compact
