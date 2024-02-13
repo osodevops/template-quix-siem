@@ -64,12 +64,12 @@ deployments:
   - name: Auth Linux Siem Detection
     application: Siem-detection
     deploymentType: Service
-    version: 927a2e366d82b3691bfa865f6b3e48a1c83ba41d
+    version: b7785bca8e0f8b110ad5cf8dfcf1529309d42ac4
     resources:
       cpu: 200
       memory: 500
       replicas: 1
-    desiredStatus: Running
+    desiredStatus: Stopped
     variables:
       - name: log_data
         inputType: InputTopic
